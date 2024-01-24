@@ -1,0 +1,88 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title th:text="#{titulo.detalleComercial}"></title>
+</head>
+<body>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h1 th:text="#{titulo.detalleComercial}"></h1>
+        </div>
+        <div class="col">
+            <form action="/comerciales">
+                <button type="submit" class="btn btn-secondary" th:text="#{boton.volver}"></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label th:text="#{label.codigo}"></label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" th:value="${comercial.id}" readonly="readonly"/>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label th:text="#{label.nombre}"></label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" th:value="${comercial.nombre}" readonly="readonly"/>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label th:text="#{label.apellido1}"></label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" th:value="${comercial.apellido1}" readonly="readonly"/>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label th:text="#{label.apellido2}"></label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" th:value="${comercial.apellido2}" readonly="readonly"/>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label th:text="#{label.comision}"></label>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" th:value="${comercial.comision}" readonly="readonly"/>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h2 th:text="#{titulo.pedidos}"></h2>
+
+            <ul>
+                <li th:each="pedido : ${listaPedidos}">
+
+                    <strong th:text="#{label.cliente}"></strong> <a th:href="@{/detalle-cliente/{id}(id=${pedido.cliente.id})}" th:text="${pedido.cliente.nombre} ${pedido.cliente.apellido1}"></a>
+                    <strong th:text="#{label.total}"></strong> <span th:text="${pedido.total}"></span>
+                    <strong th:text="#{label.fecha}"></strong> <span th:text="${#dates.format(pedido.fecha, 'yyyy-MM-dd')}"></span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
